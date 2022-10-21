@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>自定义SvgIcon公用组件 | Blog</title>
+        <meta name="author" content="yangtao">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <link rel="icon" href="">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Blog</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Blog</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>自定义SvgIcon公用组件 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/8/3
+        </span>
+        
+        <span class="category">
+            <a href="/categories/vue/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                vue
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/vue-svg/" style="color: #00bcd4">
+                    vue svg
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="因为项目中有很多地方需要用到字体svg图标，而项目中使用了很多不同来源的字体图标导致维护很麻烦，每一次需要新添加字体图标的时候就会有很麻烦的操作，因此想开发一个svg组件优化一下字体图标的引入，只需要将要引入svg文件放入指定文件夹中，然后通过svg组件绑定文件名称，就可以达到引用字体图标的目的。"><a href="#因为项目中有很多地方需要用到字体svg图标，而项目中使用了很多不同来源的字体图标导致维护很麻烦，每一次需要新添加字体图标的时候就会有很麻烦的操作，因此想开发一个svg组件优化一下字体图标的引入，只需要将要引入svg文件放入指定文件夹中，然后通过svg组件绑定文件名称，就可以达到引用字体图标的目的。" class="headerlink" title="因为项目中有很多地方需要用到字体svg图标，而项目中使用了很多不同来源的字体图标导致维护很麻烦，每一次需要新添加字体图标的时候就会有很麻烦的操作，因此想开发一个svg组件优化一下字体图标的引入，只需要将要引入svg文件放入指定文件夹中，然后通过svg组件绑定文件名称，就可以达到引用字体图标的目的。"></a>因为项目中有很多地方需要用到字体svg图标，而项目中使用了很多不同来源的字体图标导致维护很麻烦，每一次需要新添加字体图标的时候就会有很麻烦的操作，因此想开发一个svg组件优化一下字体图标的引入，只需要将要引入svg文件放入指定文件夹中，然后通过svg组件绑定文件名称，就可以达到引用字体图标的目的。</h3><h2 id="1-安装loader"><a href="#1-安装loader" class="headerlink" title="1.安装loader"></a>1.安装loader</h2><h3 id="要处理svg文件，需要要svg-sprite-loader，解析svg，因为是只在开发时需要解析，因此加上后缀-–save-dev或者-D。"><a href="#要处理svg文件，需要要svg-sprite-loader，解析svg，因为是只在开发时需要解析，因此加上后缀-–save-dev或者-D。" class="headerlink" title="要处理svg文件，需要要svg-sprite-loader，解析svg，因为是只在开发时需要解析，因此加上后缀 –save-dev或者-D。"></a>要处理svg文件，需要要svg-sprite-loader，解析svg，因为是只在开发时需要解析，因此加上后缀 –save-dev或者-D。</h3><p><code>npm install svg-sprite-loader --save-dev</code></p>
+<h2 id="2-使用svg-sprite-loader"><a href="#2-使用svg-sprite-loader" class="headerlink" title="2.使用svg-sprite-loader"></a>2.使用svg-sprite-loader</h2><h3 id="在vue-config-js中去除旧的svg规则，然后添加新的svg规则"><a href="#在vue-config-js中去除旧的svg规则，然后添加新的svg规则" class="headerlink" title="在vue.config.js中去除旧的svg规则，然后添加新的svg规则"></a>在vue.config.js中去除旧的svg规则，然后添加新的svg规则</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;)  //因为引入svg文件时需要获取文件路径，因此需要引入path </span><br><span class="line">module.exports = &#123; </span><br><span class="line">  chainWebpack: config =&gt; &#123;</span><br><span class="line">       config.module</span><br><span class="line">       .rule(&#x27;svg&#x27;)</span><br><span class="line">       .exclude</span><br><span class="line">       .add(path.join(dirname, &#x27;src/assets/icons&#x27;)) </span><br><span class="line">       .end()</span><br><span class="line">      config.module</span><br><span class="line">       .rule(&#x27;icons&#x27;)</span><br><span class="line">       .test(/.svg$/)</span><br><span class="line">       .include</span><br><span class="line">       .add(path.join(dirname, &#x27;src/assets/icons&#x27;)) </span><br><span class="line">       .end() </span><br><span class="line">       .use(&#x27;svg-sprite-loader&#x27;) </span><br><span class="line">       .loader(&#x27;svg-sprite-loader&#x27;)</span><br><span class="line">       .options(&#123; symbolId: &#x27;icon-[name]&#x27; &#125;)  </span><br><span class="line">       .end()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-创建SvgIcon组件"><a href="#3-创建SvgIcon组件" class="headerlink" title="3.创建SvgIcon组件"></a>3.创建SvgIcon组件</h2><h3 id="这个组件将会是一个公用组件，可以在很多项目中使用，因此建议放在公用组件文件夹中"><a href="#这个组件将会是一个公用组件，可以在很多项目中使用，因此建议放在公用组件文件夹中" class="headerlink" title="这个组件将会是一个公用组件，可以在很多项目中使用，因此建议放在公用组件文件夹中"></a>这个组件将会是一个公用组件，可以在很多项目中使用，因此建议放在公用组件文件夹中</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//此组件接收一个必传的参数name：svg文件的名称</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;svg class=&quot;svg-icon&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">        &lt;use :xlink:href=&quot;`#icon-$&#123;name&#125;`&quot; /&gt;</span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;SvgIcon&#x27;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    name: &#123; // svg文件名称</span><br><span class="line">      type: String,</span><br><span class="line">      required: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.svg-icon &#123;</span><br><span class="line">  width: 1em;</span><br><span class="line">  height: 1em;</span><br><span class="line">  vertical-align: -0.15em;</span><br><span class="line">  fill: currentColor;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="4-注册SvgIcon组件"><a href="#4-注册SvgIcon组件" class="headerlink" title="4.注册SvgIcon组件"></a>4.注册SvgIcon组件</h2><h3 id="组件注册可以全局注册，也可以局部注册，鉴于有很多组件和页面都要使用它，因此这里选择全局注册"><a href="#组件注册可以全局注册，也可以局部注册，鉴于有很多组件和页面都要使用它，因此这里选择全局注册" class="headerlink" title="组件注册可以全局注册，也可以局部注册，鉴于有很多组件和页面都要使用它，因此这里选择全局注册"></a>组件注册可以全局注册，也可以局部注册，鉴于有很多组件和页面都要使用它，因此这里选择全局注册</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// main.js 中   引入SvgIcon组件，全局注册SvgIcon组件</span><br><span class="line">import SvgIcon from &#x27;@/base-ui/svgIcon/SvgIcon.vue&#x27;</span><br><span class="line">Vue.component(&#x27;svg-icon&#x27;, SvgIcon)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="5-引入svg资源"><a href="#5-引入svg资源" class="headerlink" title="5.引入svg资源"></a>5.引入svg资源</h2><h3 id="使用require-context-directory-useSubdirectories-regExp-工具函数将文件夹所有后缀是svg的资源文件引入。"><a href="#使用require-context-directory-useSubdirectories-regExp-工具函数将文件夹所有后缀是svg的资源文件引入。" class="headerlink" title="使用require.context(directory,useSubdirectories,regExp) 工具函数将文件夹所有后缀是svg的资源文件引入。"></a>使用require.context(directory,useSubdirectories,regExp) 工具函数将文件夹所有后缀是svg的资源文件引入。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// require.context(directory,useSubdirectories,regExp)</span><br><span class="line">// 1.directory :检索目录</span><br><span class="line">//2.useSubdirectories：是否检索该目录下的字文件夹，true：检索，false：不检索</span><br><span class="line">//3.regExp:匹配文件的正则表达式,一般是文件名</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="require-context-directory-useSubdirectories-regExp-返回一个函数，它的原型上有1个id属性2个方法："><a href="#require-context-directory-useSubdirectories-regExp-返回一个函数，它的原型上有1个id属性2个方法：" class="headerlink" title="require.context(directory,useSubdirectories,regExp)返回一个函数，它的原型上有1个id属性2个方法："></a>require.context(directory,useSubdirectories,regExp)返回一个函数，它的原型上有1个id属性2个方法：</h3><ul>
+<li>1：id，</li>
+<li>2：keys（）这是已个函数，调用可以得到匹配到的文件名数组 </li>
+<li>3：resolve（req） 这是一个函数，接受一个参数，返回文件资源的路径<br><img src="https://s3.bmp.ovh/imgs/2022/08/03/6bb2808fd65d6f84.jpg"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//main.js</span><br><span class="line"></span><br><span class="line">// 1. 引入SvgIcon组件，全局注册Svg</span><br><span class="line">Icon组件</span><br><span class="line">import SvgIcon from &#x27;@/base-ui/svgIcon/SvgIcon.vue&#x27;</span><br><span class="line">Vue.component(&#x27;svg-icon&#x27;, SvgIcon)</span><br><span class="line">// 2. 载入所有svg icon</span><br><span class="line">const requireContext = require.context(&#x27;./assets/icons&#x27;, false, /\.svg$/)</span><br><span class="line">requireContext.keys().forEach(requireContext)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6-使用效果"><a href="#6-使用效果" class="headerlink" title="6.使用效果"></a>6.使用效果</h2><h3 id="图中svg来自阿里巴巴矢量图-注意在下载的时候记得去掉svg图标的颜色，这样才可以修改图标的颜色。"><a href="#图中svg来自阿里巴巴矢量图-注意在下载的时候记得去掉svg图标的颜色，这样才可以修改图标的颜色。" class="headerlink" title="图中svg来自阿里巴巴矢量图,注意在下载的时候记得去掉svg图标的颜色，这样才可以修改图标的颜色。"></a>图中svg来自阿里巴巴矢量图,注意在下载的时候记得去掉svg图标的颜色，这样才可以修改图标的颜色。</h3><p><img src="https://s3.bmp.ovh/imgs/2022/08/03/8b70e36202a061c9.jpg"></p>
+
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Blog
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @yangtao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "", clientSecret = "";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "",
+        owner: "",
+        admin: [""],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
+
+    </body>
+</html>
