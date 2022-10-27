@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>拖动选中和拖拽排序 | Blog</title>
+        <meta name="author" content="yangtao">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <link rel="icon" href="">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Blog</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Blog</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>拖动选中和拖拽排序 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2022/10/27
+        </span>
+        
+        <span class="category">
+            <a href="/categories/demo/">
+                <span class="icon">
+                    <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
+                </span>
+                demo
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/js-demo/" style="color: #ff7d73">
+                    js demo
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h3 id="前言：因为做项目时有类似于九宫格展示图片，然后可以点击选择图片，当时提了一下可以做一个鼠标按下拖动多选功能，后来因为其它需求，这个功能被舍弃掉，但我还是研究了一下，这里做了个demo，并添加了拖动排序等功能。"><a href="#前言：因为做项目时有类似于九宫格展示图片，然后可以点击选择图片，当时提了一下可以做一个鼠标按下拖动多选功能，后来因为其它需求，这个功能被舍弃掉，但我还是研究了一下，这里做了个demo，并添加了拖动排序等功能。" class="headerlink" title="前言：因为做项目时有类似于九宫格展示图片，然后可以点击选择图片，当时提了一下可以做一个鼠标按下拖动多选功能，后来因为其它需求，这个功能被舍弃掉，但我还是研究了一下，这里做了个demo，并添加了拖动排序等功能。"></a>前言：因为做项目时有类似于九宫格展示图片，然后可以点击选择图片，当时提了一下可以做一个鼠标按下拖动多选功能，后来因为其它需求，这个功能被舍弃掉，但我还是研究了一下，这里做了个demo，并添加了拖动排序等功能。</h3><h4 id="以下是demo效果图，这里是demo地址"><a href="#以下是demo效果图，这里是demo地址" class="headerlink" title="以下是demo效果图，这里是demo地址"></a>以下是demo效果图，<a href="https://yyy-del.github.io/dragDemo/">这里是demo地址</a></h4><p><img src="https://s3.bmp.ovh/imgs/2022/10/27/9ae21cacdff3e4fa.gif"></p>
+<hr>
+<h4 id="1-html结构，css略过"><a href="#1-html结构，css略过" class="headerlink" title="1.html结构，css略过"></a>1.html结构，css略过</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;list&quot;&gt;</span><br><span class="line">    &lt;li&gt;1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;2&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;3&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;4&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;5&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;6&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;7&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;8&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;9&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;10&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;11&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;12&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;13&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;14&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;15&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;16&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;17&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;18&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;19&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;20&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;21&lt;/li&gt;</span><br><span class="line">    &lt;div id=&quot;mask&quot;&gt;&lt;/div&gt;   </span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;ul class=&quot;list&quot;&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="第一个ul元素是用来存放待选择元素的，这里面有个div元素，平常是不可见的，只有鼠标按下时用来显示遮罩层的，效果是这样的"><a href="#第一个ul元素是用来存放待选择元素的，这里面有个div元素，平常是不可见的，只有鼠标按下时用来显示遮罩层的，效果是这样的" class="headerlink" title="第一个ul元素是用来存放待选择元素的，这里面有个div元素，平常是不可见的，只有鼠标按下时用来显示遮罩层的，效果是这样的"></a>第一个<code>ul</code>元素是用来存放待选择元素的，这里面有个<code>div</code>元素，平常是不可见的，只有鼠标按下时用来显示遮罩层的，效果是这样的</h5><h5 id="第二个ul元素是用来存放选中拖拽过来的元素"><a href="#第二个ul元素是用来存放选中拖拽过来的元素" class="headerlink" title="第二个ul元素是用来存放选中拖拽过来的元素"></a>第二个<code>ul</code>元素是用来存放选中拖拽过来的元素</h5><h4 id="2-js"><a href="#2-js" class="headerlink" title="2. js"></a>2. js</h4><h4 id="首先需要思考个问题，怎么才能得到被遮罩层罩住的元素呢？"><a href="#首先需要思考个问题，怎么才能得到被遮罩层罩住的元素呢？" class="headerlink" title="首先需要思考个问题，怎么才能得到被遮罩层罩住的元素呢？"></a>首先需要思考个问题，怎么才能得到被遮罩层罩住的元素呢？</h4><h5 id="最开始我是想用dom自带的-IntersectionObserver-来完成观察，后来没研究出来，最后使用坐标来判断"><a href="#最开始我是想用dom自带的-IntersectionObserver-来完成观察，后来没研究出来，最后使用坐标来判断" class="headerlink" title="最开始我是想用dom自带的 IntersectionObserver  来完成观察，后来没研究出来，最后使用坐标来判断"></a>最开始我是想用dom自带的 <code>IntersectionObserver </code> 来完成观察，后来没研究出来，最后使用坐标来判断</h5><h4 id="怎么使用坐标来判断呢？"><a href="#怎么使用坐标来判断呢？" class="headerlink" title="怎么使用坐标来判断呢？"></a>怎么使用坐标来判断呢？</h4><h5 id="首先拿到遮罩层mark在屏幕中的位置，因为这个是动态变化并赋值给遮罩层mark，所以在赋值的时候记录一下就可以了，然后获取所有li的节点信息，然后根据li的位置信息判断，如果li节点中的任意位置在遮罩层内部，那么认为该节点被选中，这个根据li节点的上下左右边框的位置与遮罩层mark的位置比较就能得出，然后将选中的li节点存放起来并设置一个背景色就可以了。"><a href="#首先拿到遮罩层mark在屏幕中的位置，因为这个是动态变化并赋值给遮罩层mark，所以在赋值的时候记录一下就可以了，然后获取所有li的节点信息，然后根据li的位置信息判断，如果li节点中的任意位置在遮罩层内部，那么认为该节点被选中，这个根据li节点的上下左右边框的位置与遮罩层mark的位置比较就能得出，然后将选中的li节点存放起来并设置一个背景色就可以了。" class="headerlink" title="首先拿到遮罩层mark在屏幕中的位置，因为这个是动态变化并赋值给遮罩层mark，所以在赋值的时候记录一下就可以了，然后获取所有li的节点信息，然后根据li的位置信息判断，如果li节点中的任意位置在遮罩层内部，那么认为该节点被选中，这个根据li节点的上下左右边框的位置与遮罩层mark的位置比较就能得出，然后将选中的li节点存放起来并设置一个背景色就可以了。"></a>首先拿到遮罩层mark在屏幕中的位置，因为这个是动态变化并赋值给遮罩层mark，所以在赋值的时候记录一下就可以了，然后获取所有<code>li</code>的节点信息，然后根据<code>li</code>的位置信息判断，如果<code>li</code>节点中的任意位置在遮罩层内部，那么认为该节点被选中，这个根据<code>li</code>节点的上下左右边框的位置与遮罩层mark的位置比较就能得出，然后将选中的<code>li</code>节点存放起来并设置一个背景色就可以了。</h5><h4 id="2-1-拿到遮罩层dom元素-并创建一个markInfo对象，用来存放遮罩层的信息"><a href="#2-1-拿到遮罩层dom元素-并创建一个markInfo对象，用来存放遮罩层的信息" class="headerlink" title="2.1 拿到遮罩层dom元素,并创建一个markInfo对象，用来存放遮罩层的信息"></a>2.1 拿到遮罩层dom元素,并创建一个markInfo对象，用来存放遮罩层的信息</h4> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let maskEl=$(&#x27;#mask&#x27;)[0]; </span><br><span class="line"></span><br><span class="line">let maskInfo =&#123;  //用于存储c遮罩层的信息</span><br><span class="line">   isShow: false  , //遮罩层是否显示 默认否</span><br><span class="line">   isSelectMode:true,//是否是选择模式  true 为选择 false 为取消</span><br><span class="line">   left:0, //遮罩层的left</span><br><span class="line">   width:0, //遮罩层的宽，默认0</span><br><span class="line">   rightBoundary:0, //遮罩层的右边界  rightBoundary = left + width  </span><br><span class="line">   top:0,</span><br><span class="line">   height:0,</span><br><span class="line">   bottomBoundary:0 //下边界   bottomBoundary = top + height</span><br><span class="line">&#125;</span><br><span class="line">let selectedLists= new Set([]);//拖拽多选选中的块集合 防止集合中有重复元素，因此这里选用set</span><br></pre></td></tr></table></figure>
+<h5 id="注意-因为框选时可能会存在框选已选中的元素，元素智能被选中一次，因此用直接用set来存放选中的元素集合"><a href="#注意-因为框选时可能会存在框选已选中的元素，元素智能被选中一次，因此用直接用set来存放选中的元素集合" class="headerlink" title="** 注意:因为框选时可能会存在框选已选中的元素，元素智能被选中一次，因此用直接用set来存放选中的元素集合**"></a>** 注意:因为框选时可能会存在框选已选中的元素，元素智能被选中一次，因此用直接用set来存放选中的元素集合**</h5><h4 id="2-2-鼠标右键按下时，遮罩层开始显示，鼠标移动时，根据鼠标移动的距离来计算遮罩层的位置信息，因为这个距离是用鼠标按下的距离减去鼠标抬起的距离，因此有正负之分，刚好可以用来区分当前是要选择框选的元素（maskInfo-isSelectMode-x3D-true），还是要取消被框选元素的选择状态（maskInfo-isSelectMode-x3D-false）。然后再鼠标抬起时，就可以得到最终的遮罩层信息，用来计算哪些li被选中了"><a href="#2-2-鼠标右键按下时，遮罩层开始显示，鼠标移动时，根据鼠标移动的距离来计算遮罩层的位置信息，因为这个距离是用鼠标按下的距离减去鼠标抬起的距离，因此有正负之分，刚好可以用来区分当前是要选择框选的元素（maskInfo-isSelectMode-x3D-true），还是要取消被框选元素的选择状态（maskInfo-isSelectMode-x3D-false）。然后再鼠标抬起时，就可以得到最终的遮罩层信息，用来计算哪些li被选中了" class="headerlink" title="2.2 鼠标右键按下时，遮罩层开始显示，鼠标移动时，根据鼠标移动的距离来计算遮罩层的位置信息，因为这个距离是用鼠标按下的距离减去鼠标抬起的距离，因此有正负之分，刚好可以用来区分当前是要选择框选的元素（maskInfo.isSelectMode&#x3D;true），还是要取消被框选元素的选择状态（maskInfo.isSelectMode&#x3D;false）。然后再鼠标抬起时，就可以得到最终的遮罩层信息，用来计算哪些li被选中了"></a>2.2 鼠标右键按下时，遮罩层开始显示，鼠标移动时，根据鼠标移动的距离来计算遮罩层的位置信息，因为这个距离是用鼠标按下的距离减去鼠标抬起的距离，因此有正负之分，刚好可以用来区分当前是要选择框选的元素（maskInfo.isSelectMode&#x3D;true），还是要取消被框选元素的选择状态（maskInfo.isSelectMode&#x3D;false）。然后再鼠标抬起时，就可以得到最终的遮罩层信息，用来计算哪些<code>li</code>被选中了</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$(&quot;.list&quot;).mousedown(function(event) &#123;</span><br><span class="line">      //屏蔽官方的右键菜单</span><br><span class="line">      $(&quot;.list&quot;)[0].oncontextmenu = function()&#123;return false;&#125;</span><br><span class="line">     maskInfo.isShow = event.which ===  3 ? true:false;  //鼠标右键键选中</span><br><span class="line">     maskEl.style.top = event.pageY -  event.currentTarget.offsetTop +&#x27;px&#x27;;</span><br><span class="line">     maskEl.style.left = event.pageX -  event.currentTarget.offsetLeft +&#x27;px&#x27;;</span><br><span class="line">     maskInfo.left=event.pageX;</span><br><span class="line">     maskInfo.top=event.pageY;</span><br><span class="line">     // event.preventDefault();  // 阻止默认行为</span><br><span class="line">     event.stopPropagation(); // 阻止事件冒泡</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 鼠标移动时计算遮罩的位置，宽 高</span><br><span class="line">  $(&quot;.list&quot;).mousemove(function(event) &#123;</span><br><span class="line">      if(!maskInfo.isShow) return;//只有开启了拖拽，才进行mouseover操作</span><br><span class="line">      const distanceX = maskInfo.left - event.pageX</span><br><span class="line">      const distanceY = maskInfo.top - event.pageY</span><br><span class="line">      if (distanceX &gt;0) maskEl.style.left = event.pageX -  event.currentTarget.offsetLeft + &#x27;px&#x27;  //向左移动</span><br><span class="line">      </span><br><span class="line">      maskEl.style.width = Math.abs(distanceX)  + &#x27;px&#x27;</span><br><span class="line">      maskInfo.width = Math.abs(distanceX)</span><br><span class="line">      if (distanceY &gt; 0 )  maskEl.style.top = event.pageY -  event.currentTarget.offsetTop + &#x27;px&#x27; //鼠标向上</span><br><span class="line">      maskInfo.isSelectMode = (distanceY &gt; 0 || distanceX &gt;0 ) ? false:true</span><br><span class="line">            </span><br><span class="line">      maskEl.style.height = Math.abs(distanceY) + &#x27;px&#x27;;</span><br><span class="line">      maskInfo.height = Math.abs(distanceY)</span><br><span class="line">      // event.preventDefault();  // 阻止默认行为</span><br><span class="line">      event.stopPropagation(); // 阻止事件冒泡</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">     //鼠标抬起时计算遮罩的right 和 bottom，找出遮罩覆盖的块，关闭拖拽选中开关，清除遮罩数据</span><br><span class="line">  $(&quot;.list&quot;).mouseup(function(event) &#123;</span><br><span class="line">   if(!maskInfo.isShow) return;//只有开启了拖拽，才进行mouseover操作</span><br><span class="line">     if (maskInfo.left &gt; event.pageX) maskInfo.left = event.pageX</span><br><span class="line">     if (maskInfo.top &gt; event.pageY) maskInfo.top = event.pageY</span><br><span class="line">     maskInfo.rightBoundary = maskInfo.left + maskInfo.width</span><br><span class="line">     maskInfo.bottomBoundary =maskInfo.top + maskInfo.height</span><br><span class="line"> </span><br><span class="line">    findSelected(); //找到被选中的li</span><br><span class="line">    resetMask();  //重置遮罩层数据</span><br><span class="line">    handleDrapable() //拖拽事件绑定</span><br><span class="line">    // event.preventDefault();  // 阻止默认行为</span><br><span class="line">    event.stopPropagation(); // 阻止事件冒泡</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-找到被选中的li。"><a href="#2-3-找到被选中的li。" class="headerlink" title="2.3 找到被选中的li。"></a>2.3 找到被选中的li。</h4><h5 id="怎么找到哪些li是被选中的呢？这里我想到了几种发生在li元素上面的情况"><a href="#怎么找到哪些li是被选中的呢？这里我想到了几种发生在li元素上面的情况" class="headerlink" title="怎么找到哪些li是被选中的呢？这里我想到了几种发生在li元素上面的情况"></a>怎么找到哪些<code>li</code>是被选中的呢？这里我想到了几种发生在<code>li</code>元素上面的情况</h5><ul>
+<li>任意一个角被遮罩层罩住</li>
+<li>遮罩层在某一个<code>li</code>内部</li>
+<li>只有上边或者下边，或者上下边被罩住的情况</li>
+<li>只有左边或者右边，或者左右边被罩住的情况</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">  function findSelected()&#123;</span><br><span class="line">    let lists=$(&#x27;.list&#x27;).find(&#x27;li&#x27;);</span><br><span class="line">    for(let i=0;i&lt;lists.length;i++)&#123;</span><br><span class="line">        //计算每个块的定位信息</span><br><span class="line">        let left=$(lists[i]).offset().left;</span><br><span class="line">        let rightBoundary=$(lists[i]).width()+left;</span><br><span class="line">        let top=$(lists[i]).offset().top;</span><br><span class="line">        let bottomBoundary=$(lists[i]).height()+top;</span><br><span class="line">        //判断每个块是否被遮罩盖住（即选中） 只要有任意一个部位被遮住，即选中</span><br><span class="line">        let leftIn = maskInfo.left &lt;= left &amp;&amp; left &lt;= maskInfo.rightBoundary;  //元素的左侧在遮罩层中  </span><br><span class="line">        let rightIn = maskInfo.left &lt;= rightBoundary &amp;&amp; rightBoundary &lt;= maskInfo.rightBoundary;  //元素的右侧在遮罩层中</span><br><span class="line">        let topIn =  maskInfo.top &lt;= top &amp;&amp; top &lt;= maskInfo.bottomBoundary;  //元素的上侧在遮罩层中 </span><br><span class="line">        let bottomIn= maskInfo.top &lt;= bottomBoundary &amp;&amp; bottomBoundary &lt;= maskInfo.bottomBoundary;  //元素的下侧在遮罩层中</span><br><span class="line">        let topAndBottomOut = maskInfo.top &gt;= top &amp;&amp; bottomBoundary &gt;= maskInfo.bottomBoundary //元素上下边框都不在遮罩层中</span><br><span class="line">        let leftAndRightOut = maskInfo.left &gt;= left &amp;&amp; rightBoundary &gt;= maskInfo.rightBoundary //元素左右边框都不在遮罩层中</span><br><span class="line">        let onlyLeftIn = leftIn &amp;&amp;  topAndBottomOut   //只有左侧在遮罩层中</span><br><span class="line">        let onlyRightIn = rightIn &amp;&amp; topAndBottomOut  //只有右侧在遮罩层中</span><br><span class="line">        let leftAndRightIn = maskInfo.left &lt;= left &amp;&amp; rightBoundary &lt;= maskInfo.rightBoundary &amp;&amp; topAndBottomOut  //只有左和右侧在遮罩层中</span><br><span class="line">      </span><br><span class="line">        let onlyTopIn = topIn &amp;&amp; leftAndRightOut //只有上侧在遮罩层中</span><br><span class="line">        let onlyBottomIn = bottomIn &amp;&amp; leftAndRightOut //只有下侧在遮罩层中</span><br><span class="line">        let bottomAndTopIn = maskInfo.top &lt;= top &amp;&amp; bottomBoundary &lt;=maskInfo.bottomBoundary &amp;&amp; leftAndRightOut  //只有上和下侧在遮罩层中</span><br><span class="line">        </span><br><span class="line">        let allInEL = left &lt;= maskInfo.left &amp;&amp; rightBoundary &gt;= maskInfo.rightBoundary &amp;&amp; top &lt;= maskInfo.top &amp;&amp; bottomBoundary &gt;= maskInfo.bottomBoundary//遮罩层全部在某个元素内部</span><br><span class="line">        //左上，左下，右上，上右下，任意一个角在遮罩层中或者遮罩层在某个元素内部，都为被选中元素</span><br><span class="line">        if(((leftIn || rightIn) &amp;&amp; (topIn || bottomIn)) || onlyLeftIn || onlyRightIn || bottomAndTopIn || leftAndRightIn || onlyTopIn || onlyBottomIn || allInEL)&#123;   //左上，左下，右上，上右下，任意一个角在遮罩层中或者遮罩层在某个元素内部，都为被选中元素</span><br><span class="line">           if (maskInfo.isSelectMode) &#123;</span><br><span class="line">            selectedLists.add(lists[i]);</span><br><span class="line">            $(lists[i]).addClass(&#x27;selected&#x27;);</span><br><span class="line">            lists[i].setAttribute(&#x27;draggable&#x27;,&#x27;true&#x27;) </span><br><span class="line">           &#125;else&#123;</span><br><span class="line">            selectedLists.delete(lists[i]);</span><br><span class="line">            $(lists[i]).removeClass(&#x27;selected&#x27;);</span><br><span class="line">            lists[i].setAttribute(&#x27;draggable&#x27;,&#x27;false&#x27;)</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="注意：因为被选中额元素是可以被拖动的，所以要将被选中的元素添draggable属性设置为true-被取消的元素设置为false"><a href="#注意：因为被选中额元素是可以被拖动的，所以要将被选中的元素添draggable属性设置为true-被取消的元素设置为false" class="headerlink" title="注意：因为被选中额元素是可以被拖动的，所以要将被选中的元素添draggable属性设置为true,被取消的元素设置为false"></a><strong>注意：因为被选中额元素是可以被拖动的，所以要将被选中的元素添draggable属性设置为true,被取消的元素设置为false</strong></h4><h4 id="这样选择和取消功能就完成了。"><a href="#这样选择和取消功能就完成了。" class="headerlink" title="这样选择和取消功能就完成了。"></a>这样选择和取消功能就完成了。</h4><hr>
+<h4 id="3-选中元素的拖拽排序"><a href="#3-选中元素的拖拽排序" class="headerlink" title="3.选中元素的拖拽排序"></a>3.选中元素的拖拽排序</h4><h5 id="我们怎么将元素插入到拖动的位置呢？"><a href="#我们怎么将元素插入到拖动的位置呢？" class="headerlink" title="我们怎么将元素插入到拖动的位置呢？"></a>我们怎么将元素插入到拖动的位置呢？</h5><h6 id="Node-insertBefore-可以完美解决这个问题，详情看MDN"><a href="#Node-insertBefore-可以完美解决这个问题，详情看MDN" class="headerlink" title="Node.insertBefore() 可以完美解决这个问题，详情看MDN"></a>Node.insertBefore() 可以完美解决这个问题，详情看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Node/insertBefore">MDN</a></h6><h5 id="因此，只需要找到要背插入的元素和要插入到哪个元素之前就可以了"><a href="#因此，只需要找到要背插入的元素和要插入到哪个元素之前就可以了" class="headerlink" title="** 因此，只需要找到要背插入的元素和要插入到哪个元素之前就可以了 **"></a>** 因此，只需要找到要背插入的元素和要插入到哪个元素之前就可以了 **</h5><h4 id="3-1-给要拖动的元素li的父元素绑定拖拽事件"><a href="#3-1-给要拖动的元素li的父元素绑定拖拽事件" class="headerlink" title="3.1 给要拖动的元素li的父元素绑定拖拽事件"></a>3.1 给要拖动的元素<code>li</code>的父元素绑定拖拽事件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const droppables = document.querySelectorAll(&#x27;.list&#x27;);</span><br><span class="line">// 监听droppable的相关事件</span><br><span class="line">for (const droppable of droppables) &#123;</span><br><span class="line">  droppable.addEventListener(&#x27;dragover&#x27;, dragOver);</span><br><span class="line">  droppable.addEventListener(&#x27;dragleave&#x27;, dragLeave);</span><br><span class="line">  droppable.addEventListener(&#x27;dragenter&#x27;, dragEnter);</span><br><span class="line">  droppable.addEventListener(&#x27;drop&#x27;, dragDrop);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="3-2-在拖拽事件中找到要插入的元素和插入元素的位置"><a href="#3-2-在拖拽事件中找到要插入的元素和插入元素的位置" class="headerlink" title="3.2 在拖拽事件中找到要插入的元素和插入元素的位置"></a>3.2 在拖拽事件中找到要插入的元素和插入元素的位置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">function dragOver(e) &#123;</span><br><span class="line">  //取消默认行为</span><br><span class="line">  event.preventDefault();</span><br><span class="line">  let target = event.target;</span><br><span class="line">  //因为dragover会发生在ul上，所以要判断是不是li</span><br><span class="line">  if (target.nodeName === &quot;LI&quot; &amp;&amp; target !== currentDragDom) &#123;</span><br><span class="line">      if (target &amp;&amp; target.animated)  return;</span><br><span class="line">        //getBoundingClientRect()用于获取某个元素相对于视窗的位置集合</span><br><span class="line">      let targetRect = target.getBoundingClientRect();</span><br><span class="line">      let dragingRect = currentDragDom.getBoundingClientRect();</span><br><span class="line">      console.log(target.nextSibling)</span><br><span class="line">      if (_index(currentDragDom) &lt; _index(target)) &#123;</span><br><span class="line">          //nextSibling 属性可返回某个元素之后紧跟的节点（处于同一树层级中）。</span><br><span class="line">          target.parentNode.insertBefore(currentDragDom, target.nextSibling);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          target.parentNode.insertBefore(currentDragDom, target);</span><br><span class="line">      &#125;</span><br><span class="line">      //给元素添加动画和样式</span><br><span class="line">      addAnimate(dragingRect, currentDragDom);</span><br><span class="line">      addAnimate(targetRect, target);</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//获取元素在父元素中的index</span><br><span class="line">function _index(el) &#123;</span><br><span class="line"> let index = 0;</span><br><span class="line"> if (!el || !el.parentNode) &#123;</span><br><span class="line">     return -1;</span><br><span class="line"> &#125;</span><br><span class="line"> //previousElementSibling属性返回指定元素的前一个兄弟元素（相同节点树层中的前一个元素节点）。</span><br><span class="line"> while (el &amp;&amp; (el = el.previousElementSibling)) &#123;</span><br><span class="line">     //console.log(el);</span><br><span class="line">     index++;</span><br><span class="line"> &#125;</span><br><span class="line"> return index;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-元素拖拽至另一个容器"><a href="#4-元素拖拽至另一个容器" class="headerlink" title="4.元素拖拽至另一个容器"></a>4.元素拖拽至另一个容器</h4><h5 id="只需要将拖拽的元素插入到存放的容器即可"><a href="#只需要将拖拽的元素插入到存放的容器即可" class="headerlink" title="只需要将拖拽的元素插入到存放的容器即可"></a>只需要将拖拽的元素插入到存放的容器即可</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function dragDrop(e) &#123;</span><br><span class="line">  //判断是  拖动元素至另一个容器还是改变顺序</span><br><span class="line">  //node.contains(el) 查找该节点是否存在后代节点el 存在返回true 否则为false</span><br><span class="line">  if(!e.target.contains(currentDragDom))   this.append(currentDragDom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器-。"><a href="#这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器-。" class="headerlink" title="** 这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器**。"></a>** 这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器**。</h5><h3 id="以上就是这个拖拽demo的所有内容了，完整代码看这里"><a href="#以上就是这个拖拽demo的所有内容了，完整代码看这里" class="headerlink" title="以上就是这个拖拽demo的所有内容了，完整代码看这里"></a>以上就是这个拖拽demo的所有内容了，<a href="">完整代码看这里</a></h3>
+    </div>
+    
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2022 Blog
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @yangtao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
+<script>
+    var clientID = "", clientSecret = "";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "",
+        owner: "",
+        admin: [""],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
+</script>
+
+
+    </body>
+</html>
