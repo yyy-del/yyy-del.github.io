@@ -149,7 +149,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/js-demo/" style="color: #ffa2c4">
+                <a href="/tags/js-demo/" style="color: #00a596">
                     js demo
                 </a>
             </span>
@@ -178,12 +178,16 @@
 <h4 id="4-元素拖拽至另一个容器"><a href="#4-元素拖拽至另一个容器" class="headerlink" title="4.元素拖拽至另一个容器"></a>4.元素拖拽至另一个容器</h4><h5 id="只需要将拖拽的元素插入到存放的容器即可"><a href="#只需要将拖拽的元素插入到存放的容器即可" class="headerlink" title="只需要将拖拽的元素插入到存放的容器即可"></a>只需要将拖拽的元素插入到存放的容器即可</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function dragDrop(e) &#123;</span><br><span class="line">  //判断是  拖动元素至另一个容器还是改变顺序</span><br><span class="line">  //node.contains(el) 查找该节点是否存在后代节点el 存在返回true 否则为false</span><br><span class="line">  if(!e.target.contains(currentDragDom))   this.append(currentDragDom);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器-。"><a href="#这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器-。" class="headerlink" title="** 这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器**。"></a>** 这里要注意的是，当前拖拽操作是拖拽排序还是拖拽至另一个容器**。</h5><h3 id="以上就是这个拖拽demo的所有内容了，完整代码看这里"><a href="#以上就是这个拖拽demo的所有内容了，完整代码看这里" class="headerlink" title="以上就是这个拖拽demo的所有内容了，完整代码看这里"></a>以上就是这个拖拽demo的所有内容了，<a href="">完整代码看这里</a></h3>
     </div>
+
     
-    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
-    <div id="comment">
-        <div id="gitalk-container">
-        </div>
-    </div>
+
+    
+      <!-- 样式文件 -->
+      <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css" />
+      <div id="comment">
+          <div id="waline-container">
+          </div>
+      </div>
     
 </div>
                          
@@ -212,24 +216,25 @@
         <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
-        
-<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
-<script>
-    var clientID = "", clientSecret = "";
-    
-    const gitalk = new Gitalk({
-        clientID: clientID,
-        clientSecret: clientSecret,
-        repo: "",
-        owner: "",
-        admin: [""],
-        language: "zh-CN",
-        id: location.pathname,
-        distractionFreeMode: false,
-        
-    })
-    gitalk.render("gitalk-container")
-</script>
+        <!--  -->
+
+
+  <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+  <script>
+      Waline.init({
+          el: '#waline-container',
+          serverURL: "https://comment-warehouse-fr6z08dit-yyy-del.vercel.app",
+          commentCount: "true",
+          pageview: "false",
+          emoji: "https://unpkg.com/@waline/emojis@1.0.1/weibo,https://unpkg.com/@waline/emojis@1.0.1/alus,https://unpkg.com/@waline/emojis@1.0.1/bilibili,https://unpkg.com/@waline/emojis@1.0.1/qq,https://unpkg.com/@waline/emojis@1.0.1/tieba,https://unpkg.com/@waline/emojis@1.0.1/tw-emoji".split(','),
+          meta: "nick,mail,link".split(','),
+          requiredMeta: "nick".split(','),
+          lang: "zh-CN",
+          wordLimit: parseInt("0"),
+          pageSize: "10",
+          login: "enable",
+      });
+  </script> 
 
 
     </body>

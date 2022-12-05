@@ -149,7 +149,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/vue-Devtools/" style="color: #ff7d73">
+                <a href="/tags/vue-Devtools/" style="color: #00bcd4">
                     vue Devtools
                 </a>
             </span>
@@ -168,12 +168,16 @@
 <hr>
 <h4 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h4><h5 id="因为以前Vue2的时候使用的扩展迷-这是个很好用的插件网站，要关注微信公众号才能下载，并且还有使用教程。这次我主要是想尝试一下自己打包编译一下devtools工具，本以为会很顺利，但没想到还是踩坑了，并且在rm-rf这个错误上卡了很久，这里非常感谢莫得感情学习机1号的博客：踩坑记6-vue3、生命周期钩子、vue-devtools-beta。"><a href="#因为以前Vue2的时候使用的扩展迷-这是个很好用的插件网站，要关注微信公众号才能下载，并且还有使用教程。这次我主要是想尝试一下自己打包编译一下devtools工具，本以为会很顺利，但没想到还是踩坑了，并且在rm-rf这个错误上卡了很久，这里非常感谢莫得感情学习机1号的博客：踩坑记6-vue3、生命周期钩子、vue-devtools-beta。" class="headerlink" title="因为以前Vue2的时候使用的扩展迷,这是个很好用的插件网站，要关注微信公众号才能下载，并且还有使用教程。这次我主要是想尝试一下自己打包编译一下devtools工具，本以为会很顺利，但没想到还是踩坑了，并且在rm -rf这个错误上卡了很久，这里非常感谢莫得感情学习机1号的博客：踩坑记6 vue3、生命周期钩子、vue-devtools beta。"></a>因为以前Vue2的时候使用的<a target="_blank" rel="noopener" href="https://www.extfans.com/">扩展迷</a>,这是个很好用的插件网站，要关注微信公众号才能下载，并且还有使用教程。这次我主要是想尝试一下自己打包编译一下devtools工具，本以为会很顺利，但没想到还是踩坑了，并且在<strong>rm -rf</strong>这个错误上卡了很久，这里非常感谢<a target="_blank" rel="noopener" href="https://blog.csdn.net/Alloom/article/details/119184917">莫得感情学习机1号的博客：踩坑记6 vue3、生命周期钩子、vue-devtools beta</a>。</h5>
     </div>
+
     
-    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
-    <div id="comment">
-        <div id="gitalk-container">
-        </div>
-    </div>
+
+    
+      <!-- 样式文件 -->
+      <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css" />
+      <div id="comment">
+          <div id="waline-container">
+          </div>
+      </div>
     
 </div>
                          
@@ -202,24 +206,25 @@
         <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
-        
-<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
-<script>
-    var clientID = "", clientSecret = "";
-    
-    const gitalk = new Gitalk({
-        clientID: clientID,
-        clientSecret: clientSecret,
-        repo: "",
-        owner: "",
-        admin: [""],
-        language: "zh-CN",
-        id: location.pathname,
-        distractionFreeMode: false,
-        
-    })
-    gitalk.render("gitalk-container")
-</script>
+        <!--  -->
+
+
+  <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+  <script>
+      Waline.init({
+          el: '#waline-container',
+          serverURL: "https://comment-warehouse-fr6z08dit-yyy-del.vercel.app",
+          commentCount: "true",
+          pageview: "false",
+          emoji: "https://unpkg.com/@waline/emojis@1.0.1/weibo,https://unpkg.com/@waline/emojis@1.0.1/alus,https://unpkg.com/@waline/emojis@1.0.1/bilibili,https://unpkg.com/@waline/emojis@1.0.1/qq,https://unpkg.com/@waline/emojis@1.0.1/tieba,https://unpkg.com/@waline/emojis@1.0.1/tw-emoji".split(','),
+          meta: "nick,mail,link".split(','),
+          requiredMeta: "nick".split(','),
+          lang: "zh-CN",
+          wordLimit: parseInt("0"),
+          pageSize: "10",
+          login: "enable",
+      });
+  </script> 
 
 
     </body>
