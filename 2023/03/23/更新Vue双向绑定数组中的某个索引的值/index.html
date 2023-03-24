@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+        <title>更新Vue双向绑定数组中的某个索引的值 | Blog</title>
+        <meta name="author" content="yangtao">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <link rel="icon" href="https://s3.uuu.ovh/imgs/2022/12/03/5980734228647275.png">
+        <script src="https://cdn.staticfile.org/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+        <script src="https://cdn.staticfile.org/font-awesome/6.1.1/js/all.min.js"></script>
+        
+        <link rel="stylesheet" href="/css/fonts.min.css">
+        <link rel="stylesheet" href="/css/particlex.css">
+        
+        <script src="https://cdn.staticfile.org/vue/3.2.33/vue.global.prod.min.js"></script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
+        <div id="layout">
+            <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
+            <i data-fa-symbol="bookmark-solid" class="fa-solid fa-bookmark fa-fw"></i>
+            <i data-fa-symbol="tags-solid" class="fa-solid fa-tags fa-fw"></i>
+            <transition name="into">
+                <div v-show="show_page" style="display: -not-none">
+                    <div id="menu_show">
+                         
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Blog</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;about</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;tags</span>
+        </a>
+        
+    </div>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div class="curtain" @click="menu_show = !menu_show" v-show="menu_show"></div>
+        <div :class="'title'" @click="menu_show = !menu_show">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;Blog</span>
+        </div>
+        <transition name="slide">
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-house fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-id-card fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-box-archive fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">archives</div>
+                </div>
+            </a>
+            
+            <a href="/categories">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-bookmark fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">categories</div>
+                </div>
+            </a>
+            
+            <a href="/tags">
+                <div class="item">
+                    <div style="min-width: 20px; max-width: 50px; width: 10%">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </div>
+                    <div style="min-width: 100px; max-width: 150%; width: 20%">tags</div>
+                </div>
+            </a>
+            
+        </div>
+        </transition>
+    </div>
+</nav>
+                    </div>
+                    <div id="main">
+                        
+<div class="article">
+    <div>
+        <h1>更新Vue双向绑定数组中的某个索引的值 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
+            </span>
+            2023/3/23
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <svg class="fa-icon"><use xlink:href="#tags-solid"></use></svg>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/vue/" style="color: #03a9f4">
+                    vue
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    <div class="content" v-pre>
+        <h3 id="前言：因为项目需要单独修改表格中某一行-条-数据，不刷新整个表格-表格用的是element-ui的table组件-。"><a href="#前言：因为项目需要单独修改表格中某一行-条-数据，不刷新整个表格-表格用的是element-ui的table组件-。" class="headerlink" title="前言：因为项目需要单独修改表格中某一行(条)数据，不刷新整个表格(表格用的是element-ui的table组件)。"></a>前言：因为项目需要单独修改表格中某一行(条)数据，不刷新整个表格(表格用的是element-ui的table组件)。</h3><h4 id="遇到的困难：最开始是直接用数组索引来修改this-tableData-index-newVal-然后发现数据-tableData-是修改了，但是界面上没有响应，即双向绑定失效了，想了很多办法，绑定row-key、使用this-forceUpdate-强行更新界面都不行-虽然不建议使用this-forceUpdate-，直接给table组件绑定key来更新是可以的，但是这样直接更新了整改table组件，不优雅，而且每次表格都会默认滑到顶部。"><a href="#遇到的困难：最开始是直接用数组索引来修改this-tableData-index-newVal-然后发现数据-tableData-是修改了，但是界面上没有响应，即双向绑定失效了，想了很多办法，绑定row-key、使用this-forceUpdate-强行更新界面都不行-虽然不建议使用this-forceUpdate-，直接给table组件绑定key来更新是可以的，但是这样直接更新了整改table组件，不优雅，而且每次表格都会默认滑到顶部。" class="headerlink" title="遇到的困难：最开始是直接用数组索引来修改this.tableData[index] = newVal,然后发现数据(tableData)是修改了，但是界面上没有响应，即双向绑定失效了，想了很多办法，绑定row-key、使用this.$forceUpdate()强行更新界面都不行(虽然不建议使用this.$forceUpdate())，直接给table组件绑定key来更新是可以的，但是这样直接更新了整改table组件，不优雅，而且每次表格都会默认滑到顶部。"></a>遇到的困难：最开始是直接用数组索引来修改<code>this.tableData[index] = newVal</code>,然后发现数据(tableData)是修改了，但是界面上没有响应，即双向绑定失效了，想了很多办法，绑定row-key、使用this.$forceUpdate()强行更新界面都不行(虽然不建议使用this.$forceUpdate())，直接给table组件绑定key来更新是可以的，但是这样直接更新了整改table组件，不优雅，而且每次表格都会默认滑到顶部。</h4><h4 id="原因：vue2的文档中明确地写了：由于-JavaScript-的限制，Vue-不能检测数组和对象的变化。尽管如此我们还是有一些办法来回避这些限制并保证它们的响应性。"><a href="#原因：vue2的文档中明确地写了：由于-JavaScript-的限制，Vue-不能检测数组和对象的变化。尽管如此我们还是有一些办法来回避这些限制并保证它们的响应性。" class="headerlink" title="原因：vue2的文档中明确地写了：由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。尽管如此我们还是有一些办法来回避这些限制并保证它们的响应性。"></a>原因：<a target="_blank" rel="noopener" href="https://v2.cn.vuejs.org/v2/guide/reactivity.html">vue2的文档中明确地写了</a>：<strong>由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。尽管如此我们还是有一些办法来回避这些限制并保证它们的响应性。</strong></h4><h4 id="以下是官网中的例子"><a href="#以下是官网中的例子" class="headerlink" title="以下是官网中的例子"></a>以下是官网中的例子</h4><h5 id="对于对象"><a href="#对于对象" class="headerlink" title="对于对象"></a>对于对象</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//Vue 不能检测以下数组的变动：</span><br><span class="line"></span><br><span class="line">//利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue</span><br><span class="line">//修改数组的长度时，例如：vm.items.length = newLength</span><br><span class="line"></span><br><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  data:&#123;</span><br><span class="line">    a:1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// `vm.a` 是响应式的</span><br><span class="line"></span><br><span class="line">vm.b = 2</span><br><span class="line">// `vm.b` 是非响应式的</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="对于数组"><a href="#对于数组" class="headerlink" title="对于数组"></a>对于数组</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    items: [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">vm.items[1] = &#x27;x&#x27; // 不是响应性的</span><br><span class="line">vm.items.length = 2 // 不是响应性的</span><br></pre></td></tr></table></figure>
+<h4 id="出现上述问题的原因是vue的响应式原理，vue响应式是将遍历此对象所有的-property，并使用-Object-defineProperty-把这些-property-全部转为-getter-x2F-setter，在上诉对象中vm-a是被添加了getter-x2F-setter方法，但是vm-b并没有被添加，而数组items也是被添加了getter-x2F-setter方法，但是修改items内部某个索引对应的值时，items的引用并没有被改变，因此并没有触发items的setter，因此双向绑定失败。"><a href="#出现上述问题的原因是vue的响应式原理，vue响应式是将遍历此对象所有的-property，并使用-Object-defineProperty-把这些-property-全部转为-getter-x2F-setter，在上诉对象中vm-a是被添加了getter-x2F-setter方法，但是vm-b并没有被添加，而数组items也是被添加了getter-x2F-setter方法，但是修改items内部某个索引对应的值时，items的引用并没有被改变，因此并没有触发items的setter，因此双向绑定失败。" class="headerlink" title="出现上述问题的原因是vue的响应式原理，vue响应式是将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter&#x2F;setter，在上诉对象中vm.a是被添加了getter&#x2F;setter方法，但是vm.b并没有被添加，而数组items也是被添加了getter&#x2F;setter方法，但是修改items内部某个索引对应的值时，items的引用并没有被改变，因此并没有触发items的setter，因此双向绑定失败。"></a>出现上述问题的原因是vue的响应式原理，vue响应式是<strong>将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter&#x2F;setter</strong>，在上诉对象中vm.a是被添加了getter&#x2F;setter方法，但是vm.b并没有被添加，而数组items也是被添加了getter&#x2F;setter方法，但是修改items内部某个索引对应的值时，items的引用并没有被改变，因此并没有触发items的setter，因此双向绑定失败。</h4><h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><h4 id="vue在文档中已经给出了处理这种双向绑定失效的方法，即Vue-set-target-propertyName-index-value"><a href="#vue在文档中已经给出了处理这种双向绑定失效的方法，即Vue-set-target-propertyName-index-value" class="headerlink" title="vue在文档中已经给出了处理这种双向绑定失效的方法，即Vue.set( target, propertyName/index, value )"></a>vue在文档中已经给出了处理这种双向绑定失效的方法，即<code>Vue.set( target, propertyName/index, value )</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Vue.set( target, propertyName/index, value )</span><br><span class="line">&#123;Object | Array&#125; target</span><br><span class="line">&#123;string | number&#125; propertyName/index</span><br><span class="line">&#123;any&#125; value</span><br><span class="line"></span><br><span class="line">//返回值：设置的值</span><br><span class="line"></span><br><span class="line">//用法：</span><br><span class="line">//向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新 property，</span><br><span class="line">//因为 Vue 无法探测普通的新增 property (比如 this.myObject.newProperty = &#x27;hi&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//因此：上诉对象和数组的响应式方法是使用set方法来修改，添加响应</span><br><span class="line">Vue.set(vm.someObject, &#x27;b&#x27;, 2)</span><br><span class="line">Vue.set(vm.items, indexOfItem, newValue)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+
+    
+      <!-- 样式文件 -->
+      <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css" />
+      <div id="comment">
+          <div id="waline-container">
+          </div>
+      </div>
+    
+</div>
+                         
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2022 - 2023 Blog
+            <span class="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @yangtao
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a></div>
+        
+    </div>
+</footer>
+                    </div>
+                </div>
+            </transition>
+            <div id="img_show">
+                <img id="img_content" alt="img_show">
+            </div>
+        </div>
+        <script src="https://cdn.staticfile.org/highlight.js/11.5.1/highlight.min.js"></script>
+        <script src="/js/particlex.js"></script>
+        <script src="/js/showimg.js"></script>
+        <!--  -->
+
+
+  <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
+  <script>
+      Waline.init({
+          el: '#waline-container',
+          serverURL: "comment-warehouse-b5g52xvkz-yyy-del.vercel.app/",
+          commentCount: "true",
+          pageview: "false",
+          emoji: "https://unpkg.com/@waline/emojis@1.0.1/weibo,https://unpkg.com/@waline/emojis@1.0.1/alus,https://unpkg.com/@waline/emojis@1.0.1/bilibili,https://unpkg.com/@waline/emojis@1.0.1/qq,https://unpkg.com/@waline/emojis@1.0.1/tieba,https://unpkg.com/@waline/emojis@1.0.1/tw-emoji".split(','),
+          meta: "nick,mail,link".split(','),
+          requiredMeta: "nick".split(','),
+          lang: "zh-CN",
+          wordLimit: parseInt("0"),
+          pageSize: "10",
+          login: "enable",
+      });
+  </script> 
+
+
+    </body>
+</html>
